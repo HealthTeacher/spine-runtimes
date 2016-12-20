@@ -70,13 +70,14 @@ module spine.canvas {
 				let bone = slot.bone;
 				let x = vertices[0];
 				let y = vertices[1];
-				let rotation = (bone.getWorldRotationX() - att.rotation) * Math.PI / 180;
+				let rotation = (attachment.scaleX * attachment.scaleY) * (bone.getWorldRotationX() - att.rotation) * Math.PI / 180;
 				let xx = vertices[24] - vertices[0];
 				let xy = vertices[25] - vertices[1];
 				let yx = vertices[8] - vertices[0];
 				let yy = vertices[9] - vertices[1];
 				let w = Math.sqrt(xx * xx + xy * xy), h = -Math.sqrt(yx * yx + yy * yy);
 				ctx.translate(x, y);
+        context.scale(attachment.scaleX, attachment.scaleY);
 				ctx.rotate(rotation);
 				if (region.rotate) {
 					ctx.rotate(Math.PI / 2);
@@ -87,6 +88,7 @@ module spine.canvas {
 				}
 				if (this.debugRendering) ctx.strokeRect(0, 0, w, h);
 				ctx.rotate(-rotation);
+        context.scale(attachment.scaleX, attachment.scaleY);
 				ctx.translate(-x, -y);
 			}
 		}
