@@ -110,13 +110,19 @@ module spine {
 			request.send();
 		}
 
-		loadTexture (clientId: string, textureLoader: (image: HTMLImageElement) => any, path: string) {
+		loadTexture (clientId: string, 
+			textureLoader: (image: HTMLImageElement) => any, 
+			path: string, 
+			allowCors: true
+		) {
 			path = this.pathPrefix + path;
 			if (!this.queueAsset(clientId, textureLoader, path)) return;
 
 			let img = new Image();			 
 			img.src = path;
-			img.crossOrigin = "anonymous";
+			if (allowCors) {
+				img.crossOrigin = "anonymous";
+			}
 			img.onload = (ev) => {
 				this.rawAssets[path] = img;
 			}

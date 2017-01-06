@@ -68,12 +68,15 @@ module spine {
 
 		loadTexture (path: string,
 			success: (path: string, image: HTMLImageElement) => void = null,
-			error: (path: string, error: string) => void = null
+			error: (path: string, error: string) => void = null,
+			allowCors: true
 		) {
 			path = this.pathPrefix + path;
 			this.toLoad++;
 			let img = new Image();
-			img.crossOrigin = "anonymous";
+			if (allowCors) {
+				img.crossOrigin = "anonymous";
+			}
 			img.src = path;
 			img.onload = (ev) => {
 				let texture = this.textureLoader(img);
