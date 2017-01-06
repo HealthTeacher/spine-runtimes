@@ -682,7 +682,7 @@ declare module spine {
         private queueAsset(clientId, textureLoader, path);
         loadText(clientId: string, path: string): void;
         loadJson(clientId: string, path: string): void;
-        loadTexture(clientId: string, textureLoader: (image: HTMLImageElement) => any, path: string): void;
+        loadTexture(clientId: string, textureLoader: (image: HTMLImageElement) => any, path: string, allowCors: true): void;
         get(clientId: string, path: string): any;
         private updateClientAssets(clientAssets);
         isLoadingComplete(clientId: string): boolean;

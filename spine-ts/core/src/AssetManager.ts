@@ -71,12 +71,11 @@ module spine {
 			error: (path: string, error: string) => void = null,
 			allowCors: true
 		) {
-			console.log("allowing cors?", allowCors)
 			path = this.pathPrefix + path;
 			this.toLoad++;
 			let img = new Image();
 			if (allowCors) {
-				img.crossOrigin = "anonymous";			
+				img.crossOrigin = "anonymous";
 			}
 			img.src = path;
 			img.onload = (ev) => {

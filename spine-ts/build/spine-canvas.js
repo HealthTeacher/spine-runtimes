@@ -40,7 +40,6 @@ var spine;
             var _this = this;
             if (success === void 0) { success = null; }
             if (error === void 0) { error = null; }
-            console.log("allowing cors?", allowCors);
             path = this.pathPrefix + path;
             this.toLoad++;
             var img = new Image();
@@ -3458,14 +3457,16 @@ var spine;
             request.open("GET", path, true);
             request.send();
         };
-        SharedAssetManager.prototype.loadTexture = function (clientId, textureLoader, path) {
+        SharedAssetManager.prototype.loadTexture = function (clientId, textureLoader, path, allowCors) {
             var _this = this;
             path = this.pathPrefix + path;
             if (!this.queueAsset(clientId, textureLoader, path))
                 return;
             var img = new Image();
             img.src = path;
-            img.crossOrigin = "anonymous";
+            if (allowCors) {
+                img.crossOrigin = "anonymous";
+            }
             img.onload = function (ev) {
                 _this.rawAssets[path] = img;
             };
